@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfan Azis | Software Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           1. PENGATURAN TEMA & VARIABEL
+           ========================================= */
+        :root, body.theme-dark {
+            --bg-color: #0f172a;
+            --bg-alt: #1e293b; /* Warna selang-seling antar section */
+            --card-bg: #0f172a;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --nav-bg: rgba(15, 23, 42, 0.9);
+            --primary-color: #3b82f6;
+            --hero-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
+
+        body.theme-light {
+            --bg-color: #f0f9ff;
+            --bg-alt: #e0f2fe; /* Warna selang-seling terang */
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --text-muted: #475569;
+            --nav-bg: rgba(240, 249, 255, 0.9);
+            --primary-color: #2563eb;
+            --hero-bg: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        }
+
+        /* =========================================
+           2. RESET & ATURAN WAJIB
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+        body { background-color: var(--bg-color) !important; color: var(--text-color) !important; transition: all 0.4s ease; }
+        h1, h2, h3, h4, .nav-links a, #theme-toggle { color: var(--text-color) !important; }
+        p, li { color: var(--text-muted) !important; line-height: 1.8; }
+        .logo, .hero h1 span, .section-title span { color: var(--primary-color) !important; }
+
+        /* =========================================
+           3. KOMPONEN UI
+           ========================================= */
+        nav { background-color: var(--nav-bg) !important; display: flex; justify-content: space-between; align-items: center; padding: 20px 10%; position: fixed; width: 100%; top: 0; z-index: 100; backdrop-filter: blur(10px); transition: all 0.4s ease; }
+        
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; margin-left: 25px; font-weight: 400; position: relative; padding-bottom: 5px; transition: color 0.3s; font-size: 0.95rem; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: var(--primary-color); transition: width 0.3s ease-in-out; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: var(--primary-color) !important; }
+
+        #theme-toggle { background: none; border: none; font-size: 1.2rem; margin-left: 25px; cursor: pointer; transition: transform 0.3s; }
+        #theme-toggle:hover { color: var(--primary-color) !important; transform: rotate(20deg); }
+
+        .btn { padding: 12px 30px; background-color: var(--primary-color) !important; color: white !important; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; border: none; transition: all 0.3s; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
+
+        /* =========================================
+           4. LAYOUT SECTION & GRID
+           ========================================= */
+        .hero { background: var(--hero-bg) !important; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 10% 0; transition: all 0.4s ease; }
+        .hero h1 { font-size: 4rem; margin-bottom: 10px; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; }
+
+        section { padding: 100px 10%; background-color: var(--bg-color) !important; transition: all 0.4s ease; }
+        section.bg-alt { background-color: var(--bg-alt) !important; } /* Background selang-seling */
+        
+        .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
+
+        /* Styling Flex untuk Tentang Saya */
+        .about-content { display: flex; gap: 40px; align-items: center; }
+        .about-text { flex: 1; }
+        
+        /* Grid Kartu */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background-color: var(--card-bg) !important; padding: 30px; border-radius: 12px; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid rgba(148, 163, 184, 0.1); }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .card i { font-size: 2.5rem; color: var(--primary-color) !important; margin-bottom: 20px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+
+        /* Styling Khusus Kontak */
+        .contact-container { text-align: center; max-width: 600px; margin: 0 auto; }
+        .contact-container i { font-size: 3rem; color: var(--primary-color) !important; margin-bottom: 20px; }
+
+        footer { text-align: center; padding: 40px; background-color: var(--card-bg) !important; transition: all 0.4s ease; }
+        .social-links { margin-top: 20px; }
+        .social-links a { display: inline-block; margin: 0 10px; font-size: 1.5rem; color: var(--text-muted) !important; transition: all 0.3s; }
+        .social-links a:hover { color: var(--primary-color) !important; transform: translateY(-3px); }
+
+        /* Responsif untuk HP */
+        @media (max-width: 768px) {
+            .nav-links { display: none; /* Menu disembunyikan di layar kecil untuk dirapikan nanti */ }
+            .hero h1 { font-size: 2.5rem; }
+            .about-content { flex-direction: column; }
+        }
+    </style>
+</head>
+
+<body class="theme-dark">
+
+    <nav>
+        <div class="logo">Aziss.Dev</div>
+        <div class="nav-links">
+            <a href="#beranda">Beranda</a>
+            <a href="#tentang">Tentang Saya</a>
+            <a href="#skill">Skill</a>
+            <a href="#pengalaman">Pengalaman</a>
+            <a href="#projek">Projek</a>
+            <a href="#kontak">Contact</a>
+            <button id="theme-toggle" title="Ganti Tema">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section id="beranda" class="hero">
+        <p>Halo, selamat datang. Saya</p>
+        <h1>Alfan Azis <span>Herdiansyah</span></h1>
+        <p>Mahasiswa Teknik Informatika yang memiliki *passion* dalam pengembangan perangkat lunak, otomatisasi sistem, dan eksplorasi *hardware*.</p>
+        <div>
+            <a href="#projek" class="btn"><i class="fa-solid fa-rocket"></i> Lihat Portofolio</a>
+        </div>
+    </section>
+
+    <section id="tentang" class="bg-alt">
+        <h2 class="section-title">Tentang <span>Saya</span></h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Saya adalah mahasiswa aktif <strong>Semester 2 program studi Teknik Informatika (TI)</strong>. Saya memiliki minat yang kuat dalam menciptakan solusi digital yang efisien dan praktis.</p>
+                <br>
+                <p>Meskipun masih di tahap awal perkuliahan, saya aktif mengeskplorasi logika pemrograman, eksperimen mengubah perangkat lawas menjadi *headless server*, dan mempelajari arsitektur kode secara mandiri. Di luar dunia IT, saya juga senang mempelajari konsep statistika, probabilitas, dan sedikit ilmu kognitif untuk mengasah pola pikir sistematis.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skill">
+        <h2 class="section-title">Fokus <span>Skill</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fa-brands fa-whatsapp"></i>
+                <h3>Bot Development</h3>
+                <p>Mampu membangun dan merancang logika skrip bot WhatsApp otomatis untuk manajemen katalog, fitur *reply quote*, dan verifikasi pembayaran.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-server"></i>
+                <h3>Server Management</h3>
+                <p>Konfigurasi sistem operasi Linux dan pengelolaan perangkat *hardware* (*Set-Top Box* atau laptop minus) menjadi *headless server* mandiri.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Web Development</h3>
+                <p>Pemahaman fundamental HTML, CSS, JavaScript, dan integrasi *database* ringan (Google Apps Script) untuk pembuatan *tools* web.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pengalaman" class="bg-alt">
+        <h2 class="section-title">Rekam <span>Pengalaman</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h3>Freelance Bot & Scripting</h3>
+                <p><strong>Proyek Mandiri</strong></p>
+                <p>Merancang dan memperbaiki logika bot berbasis WhatsApp untuk klien *reseller*. Menyelesaikan *bug* kompleks seperti sinkronisasi urutan nomor katalog setelah item dihapus, serta membuat dasbor admin via *chat*.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-mug-hot"></i>
+                <h3>Pramusaji Angkringan</h3>
+                <p><strong>F&B / Hospitality</strong></p>
+                <p>Memiliki pengalaman profesional di sektor pelayanan. Bertanggung jawab dalam menyajikan pesanan, manajemen stok bahan, dan berinteraksi langsung dengan pelanggan. Pengalaman ini membentuk kemampuan komunikasi dan kerja keras saya.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projek">
+        <h2 class="section-title">Showcase <span>Projek</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fa-solid fa-key"></i>
+                <h3>Sistem Manajemen Reseller</h3>
+                <p>Otomatisasi bisnis distribusi akun *trial* premium menggunakan bot, memastikan transaksi yang cepat, *broadcast* yang terfilter, dan terkelola dengan baik secara 24/7.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-wallet"></i>
+                <h3>Finance Tracker Web App</h3>
+                <p>Aplikasi web responsif untuk mencatat pemasukan dan pengeluaran secara *real-time* yang terintegrasi langsung dengan API Google Sheets sebagai *database*.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontak" class="bg-alt">
+        <h2 class="section-title">Hubungi <span>Saya</span></h2>
+        <div class="contact-container">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <p>Mari diskusikan ide, proyek, atau peluang kerja sama. Saya selalu terbuka untuk mengeksplorasi teknologi baru dan mendengarkan kebutuhan sistem Anda.</p>
+            <br>
+            <a href="https://wa.me/6285739246637" class="btn" target="_blank"><i class="fa-brands fa-whatsapp"></i> Chat via WhatsApp</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Alfan Azis Herdiansyah. Crafted with Code.</p>
+        <div class="social-links">
+            <a href="https://github.com/azissalfn03-png" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://tiktok.com/zisslfn" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://instagram.com/_alfnzs" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        const btnTheme = document.getElementById('theme-toggle');
+        const iconTheme = btnTheme.querySelector('i');
+
+        btnTheme.addEventListener('click', () => {
+            document.body.classList.toggle('theme-light');
+            document.body.classList.toggle('theme-dark');
+
+            if(document.body.classList.contains('theme-light')) {
+                iconTheme.className = 'fa-solid fa-moon'; 
+            } else {
+                iconTheme.className = 'fa-solid fa-sun'; 
+            }
+        });
+    </script>
+</body>
+</html>
