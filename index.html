@@ -103,6 +103,27 @@
             .hero h1 { font-size: 2.5rem; }
             .about-content { flex-direction: column; }
         }
+            /* =========================================
+           6. PENGATURAN TOMBOL GANDA (HERO)
+           ========================================= */
+        .hero-buttons {
+            display: flex;
+            gap: 15px; /* Jarak antar tombol */
+            flex-wrap: wrap; /* Agar tombol turun otomatis jika layar HP sempit */
+            margin-top: 10px;
+        }
+    
+        /* Desain Tombol CV (Garis Pinggir / Outline) */
+        .btn-outline {
+            background-color: transparent !important;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color) !important;
+        }
+    
+        .btn-outline:hover {
+            background-color: var(--primary-color) !important;
+            color: #ffffff !important;
+        }
     </style>
 </head>
 
@@ -127,8 +148,9 @@
         <p>Halo, selamat datang. Saya</p>
         <h1>Alfan Azis <span>Herdiansyah</span></h1>
         <p>Mahasiswa Teknik Informatika yang memiliki *passion* dalam pengembangan perangkat lunak, otomatisasi sistem, dan eksplorasi *hardware*.</p>
-        <div>
+        <div class="hero-buttons">
             <a href="#projek" class="btn"><i class="fa-solid fa-rocket"></i> Lihat Portofolio</a>
+            <a href="cv-alfan.pdf" target="_blank" class="btn btn-outline"><i class="fa-solid fa-file-pdf"></i> Unduh CV</a>
         </div>
     </section>
 
