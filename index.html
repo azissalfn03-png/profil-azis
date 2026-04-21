@@ -13,7 +13,7 @@
            ========================================= */
         :root, body.theme-dark {
             --bg-color: #0f172a;
-            --bg-alt: #1e293b; /* Warna selang-seling antar section */
+            --bg-alt: #1e293b; 
             --card-bg: #0f172a;
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
@@ -24,7 +24,7 @@
 
         body.theme-light {
             --bg-color: #f0f9ff;
-            --bg-alt: #e0f2fe; /* Warna selang-seling terang */
+            --bg-alt: #e0f2fe; 
             --card-bg: #ffffff;
             --text-color: #0f172a;
             --text-muted: #475569;
@@ -42,11 +42,9 @@
         body { background-color: var(--bg-color) !important; color: var(--text-color) !important; transition: all 0.4s ease; }
         h1, h2, h3, h4, .nav-links a, #theme-toggle { color: var(--text-color) !important; }
         p, li { color: var(--text-muted) !important; line-height: 1.8; }
-        .logo, .hero h1 span, .section-title span { color: var(--primary-color) !important; }
-        .logo { 
-        font-size: 2rem !important; 
-        font-weight: 700; 
-        }
+        
+        .logo { font-size: 2.5rem !important; font-weight: 700; color: var(--primary-color) !important; }
+        .hero h1 span, .section-title span { color: var(--primary-color) !important; }
 
         /* =========================================
            3. KOMPONEN UI
@@ -54,7 +52,7 @@
         nav { background-color: var(--nav-bg) !important; display: flex; justify-content: space-between; align-items: center; padding: 20px 10%; position: fixed; width: 100%; top: 0; z-index: 100; backdrop-filter: blur(10px); transition: all 0.4s ease; }
         
         .nav-links { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; margin-left: 25px; font-weight: 400; position: relative; padding-bottom: 5px; transition: color 0.3s; font-size: 0.95rem; }
+        .nav-links a { text-decoration: none; margin-left: 20px; font-weight: 400; position: relative; padding-bottom: 5px; transition: color 0.3s; font-size: 0.9rem; }
         .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: var(--primary-color); transition: width 0.3s ease-in-out; }
         .nav-links a:hover::after { width: 100%; }
         .nav-links a:hover { color: var(--primary-color) !important; }
@@ -65,6 +63,10 @@
         .btn { padding: 12px 30px; background-color: var(--primary-color) !important; color: white !important; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; border: none; transition: all 0.3s; }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
 
+        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
+        .btn-outline { background-color: transparent !important; border: 2px solid var(--primary-color); color: var(--primary-color) !important; }
+        .btn-outline:hover { background-color: var(--primary-color) !important; color: #ffffff !important; }
+
         /* =========================================
            4. LAYOUT SECTION & GRID
            ========================================= */
@@ -73,22 +75,20 @@
         .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; }
 
         section { padding: 100px 10%; background-color: var(--bg-color) !important; transition: all 0.4s ease; }
-        section.bg-alt { background-color: var(--bg-alt) !important; } /* Background selang-seling */
+        section.bg-alt { background-color: var(--bg-alt) !important; }
         
         .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
 
-        /* Styling Flex untuk Tentang Saya */
         .about-content { display: flex; gap: 40px; align-items: center; }
         .about-text { flex: 1; }
         
-        /* Grid Kartu */
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .card { background-color: var(--card-bg) !important; padding: 30px; border-radius: 12px; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid rgba(148, 163, 184, 0.1); }
         .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .card i { font-size: 2.5rem; color: var(--primary-color) !important; margin-bottom: 20px; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 5px; line-height: 1.6; }
 
-        /* Styling Khusus Kontak */
         .contact-container { text-align: center; max-width: 600px; margin: 0 auto; }
         .contact-container i { font-size: 3rem; color: var(--primary-color) !important; margin-bottom: 20px; }
 
@@ -97,32 +97,10 @@
         .social-links a { display: inline-block; margin: 0 10px; font-size: 1.5rem; color: var(--text-muted) !important; transition: all 0.3s; }
         .social-links a:hover { color: var(--primary-color) !important; transform: translateY(-3px); }
 
-        /* Responsif untuk HP */
         @media (max-width: 768px) {
-            .nav-links { display: none; /* Menu disembunyikan di layar kecil untuk dirapikan nanti */ }
+            .nav-links { display: none; }
             .hero h1 { font-size: 2.5rem; }
             .about-content { flex-direction: column; }
-        }
-            /* =========================================
-           6. PENGATURAN TOMBOL GANDA (HERO)
-           ========================================= */
-        .hero-buttons {
-            display: flex;
-            gap: 15px; /* Jarak antar tombol */
-            flex-wrap: wrap; /* Agar tombol turun otomatis jika layar HP sempit */
-            margin-top: 10px;
-        }
-    
-        /* Desain Tombol CV (Garis Pinggir / Outline) */
-        .btn-outline {
-            background-color: transparent !important;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color) !important;
-        }
-    
-        .btn-outline:hover {
-            background-color: var(--primary-color) !important;
-            color: #ffffff !important;
         }
     </style>
 </head>
@@ -136,6 +114,7 @@
             <a href="#tentang">Tentang Saya</a>
             <a href="#skill">Skill</a>
             <a href="#pengalaman">Pengalaman</a>
+            <a href="#pendidikan">Pendidikan</a>
             <a href="#projek">Projek</a>
             <a href="#kontak">Contact</a>
             <button id="theme-toggle" title="Ganti Tema">
@@ -158,9 +137,9 @@
         <h2 class="section-title">Tentang <span>Saya</span></h2>
         <div class="about-content">
             <div class="about-text">
-                <p>Saya adalah mahasiswa aktif <strong>Semester 2 program studi Teknik Informatika (TI)</strong>. Saya memiliki minat yang kuat dalam menciptakan solusi digital yang efisien dan praktis.</p>
+                <p>Saya adalah mahasiswa aktif program studi <strong>Teknik Informatika (IPK 3.8)</strong> yang dinamis dengan pengalaman lintas bidang. Saya memadukan keahlian *hardware* (teknisi jaringan RT/RW Net), automasi *software* (pengelolaan bot bisnis akun trial aplikasi), dan *customer service* (pelayanan angkringan).</p>
                 <br>
-                <p>Meskipun masih di tahap awal perkuliahan, saya aktif mengeskplorasi logika pemrograman, eksperimen mengubah perangkat lawas menjadi *headless server*, dan mempelajari arsitektur kode secara mandiri. Di luar dunia IT, saya juga senang mempelajari konsep statistika, probabilitas, dan sedikit ilmu kognitif untuk mengasah pola pikir sistematis.</p>
+                <p>Saya terbiasa bekerja di lingkungan yang cepat dengan kemampuan komunikasi yang luwes. Berambisi untuk berkembang menjadi *Engineer* yang berorientasi pada solusi bisnis dan menghargai kerja keras, ketelitian teknis, serta dedikasi terhadap kepuasan pelanggan.</p>
             </div>
         </div>
     </section>
@@ -171,62 +150,116 @@
             <div class="card">
                 <i class="fa-brands fa-whatsapp"></i>
                 <h3>Bot Development</h3>
-                <p>Mampu membangun dan merancang logika skrip bot WhatsApp otomatis untuk manajemen katalog, fitur *reply quote*, dan verifikasi pembayaran.</p>
+                <p>Mampu membangun dan merancang logika skrip bot WhatsApp otomatis untuk manajemen katalog dan transaksi bisnis.</p>
             </div>
             <div class="card">
                 <i class="fa-solid fa-server"></i>
-                <h3>Server Management</h3>
-                <p>Konfigurasi sistem operasi Linux dan pengelolaan perangkat *hardware* (*Set-Top Box* atau laptop minus) menjadi *headless server* mandiri.</p>
+                <h3>Server & Jaringan</h3>
+                <p>Instalasi *Fiber Optic*/LAN, konfigurasi Router/Modem, dan eksplorasi *headless server* mandiri.</p>
             </div>
             <div class="card">
                 <i class="fa-solid fa-code"></i>
                 <h3>Web Development</h3>
-                <p>Pemahaman fundamental HTML, CSS, JavaScript, dan integrasi *database* ringan (Google Apps Script) untuk pembuatan *tools* web.</p>
+                <p>Pemahaman fundamental HTML, CSS, JavaScript, dan integrasi API (Google Sheets) untuk aplikasi web interaktif.</p>
             </div>
         </div>
     </section>
 
     <section id="pengalaman" class="bg-alt">
-        <h2 class="section-title">Rekam <span>Pengalaman</span></h2>
-        <div class="grid-container">
-            <div class="card">
-                <i class="fa-solid fa-laptop-code"></i>
-                <h3>Freelance Bot & Scripting</h3>
-                <p><strong>Proyek Mandiri</strong></p>
-                <p>Merancang dan memperbaiki logika bot berbasis WhatsApp untuk klien *reseller*. Menyelesaikan *bug* kompleks seperti sinkronisasi urutan nomor katalog setelah item dihapus, serta membuat dasbor admin via *chat*.</p>
-            </div>
-            <div class="card">
-                <i class="fa-solid fa-mug-hot"></i>
-                <h3>Pramusaji Angkringan</h3>
-                <p><strong>F&B / Hospitality</strong></p>
-                <p>Memiliki pengalaman profesional di sektor pelayanan. Bertanggung jawab dalam menyajikan pesanan, manajemen stok bahan, dan berinteraksi langsung dengan pelanggan. Pengalaman ini membentuk kemampuan komunikasi dan kerja keras saya.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="projek">
-        <h2 class="section-title">Showcase <span>Projek</span></h2>
+        <h2 class="section-title">Pengalaman <span>Kerja</span></h2>
         <div class="grid-container">
             <div class="card">
                 <i class="fa-solid fa-key"></i>
-                <h3>Sistem Manajemen Reseller</h3>
-                <p>Otomatisasi bisnis distribusi akun *trial* premium menggunakan bot, memastikan transaksi yang cepat, *broadcast* yang terfilter, dan terkelola dengan baik secara 24/7.</p>
+                <h3>Reseller Aplikasi Premium</h3>
+                <p><strong>Freelance</strong> | Jan 2026 - Sekarang</p>
+                <p>Mengelola operasional bisnis dan distribusi produk digital (akun trial aplikasi premium). Menangani siklus layanan pelanggan mulai dari pemrosesan pesanan, penyelesaian masalah akses, hingga *after-sales service* untuk memastikan kepuasan pelanggan.</p>
             </div>
             <div class="card">
-                <i class="fa-solid fa-wallet"></i>
-                <h3>Finance Tracker Web App</h3>
-                <p>Aplikasi web responsif untuk mencatat pemasukan dan pengeluaran secara *real-time* yang terintegrasi langsung dengan API Google Sheets sebagai *database*.</p>
+                <i class="fa-solid fa-mug-hot"></i>
+                <h3>Waiters</h3>
+                <p><strong>Angkringan Serawung</strong> | Apr 2025 - Sekarang</p>
+                <p>Melayani dan mencatat pesanan pelanggan secara akurat dengan tempo cepat. Melakukan multitasking dengan efisien; menjaga kualitas kematangan menu sambil tetap responsif terhadap kedatangan pelanggan baru atau permintaan tambahan.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-network-wired"></i>
+                <h3>Teknisi Jaringan</h3>
+                <p><strong>Mantri Jinom Babadan</strong> | Nov 2023 - Mei 2024</p>
+                <p>Melakukan instalasi, penarikan kabel (Fiber Optic/LAN), dan konfigurasi perangkat klien (Modem ONT, Router, dan Access Point) secara presisi. Menangani *troubleshooting* fisik dan *logical error* untuk meminimalisir *downtime* koneksi.</p>
             </div>
         </div>
     </section>
 
-    <section id="kontak" class="bg-alt">
+    <section id="pendidikan">
+        <h2 class="section-title">Riwayat <span>Pendidikan</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h3>Universitas Muhammadiyah Ponorogo</h3>
+                <p><strong>S1 Teknik Informatika</strong></p>
+                <p>2025 - Sekarang</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-school"></i>
+                <h3>SMKS AL-ISLAM Joresan</h3>
+                <p><strong>Teknik Komputer dan Jaringan</strong></p>
+                <p>2022 - 2025</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-building-columns"></i>
+                <h3>MTs AL-ISLAM Joresan</h3>
+                <p>Sekolah Menengah Pertama</p>
+                <p>2019 - 2022</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projek" class="bg-alt">
+        <h2 class="section-title">Showcase <span>Projek</span></h2>
+        <div class="grid-container">
+            
+            <div class="card">
+                <i class="fa-solid fa-cloud"></i>
+                <h3>SIAKAD CLOUD</h3>
+                <p>Aplikasi web Sistem Informasi Akademik berbasis *cloud* yang terintegrasi dengan Firebase. Dilengkapi dengan fitur autentikasi (*Login/Register*) dan Sistem Manajemen User (CRUD) khusus untuk Admin.</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-heart"></i>
+                <h3>Web Undangan Digital</h3>
+                <p>Pengembangan undangan pernikahan digital interaktif (*Wedding Invitation*). Dilengkapi animasi transisi *smooth*, galeri foto, fitur hitung mundur (*countdown*), dan penarikan parameter nama tamu langsung dari URL.</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-cash-register"></i>
+                <h3>Web Point of Sale (Kasir)</h3>
+                <p>Sistem kasir digital berbasis web untuk memudahkan pencatatan transaksi penjualan secara responsif. Memiliki fitur manajemen keranjang belanja dan kalkulasi total harga secara otomatis.</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-robot"></i>
+                <h3>Bot Manajemen Reseller</h3>
+                <p>Otomatisasi bisnis distribusi akun *trial* menggunakan bot WhatsApp. Memiliki fitur balas otomatis, pemanggilan katalog mandiri oleh pelanggan, serta verifikasi link pembayaran QRIS (*Google Sheets integration*).</p>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-wallet"></i>
+                <h3>Finance Tracker App</h3>
+                <p>Aplikasi web interaktif untuk mencatat arus kas (pemasukan dan pengeluaran) angkringan secara *real-time*. Terhubung secara dinamis dengan API Google Sheets sebagai *database* penyimpanannya.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="kontak">
         <h2 class="section-title">Hubungi <span>Saya</span></h2>
         <div class="contact-container">
             <i class="fa-solid fa-envelope-open-text"></i>
-            <p>Mari diskusikan ide, proyek, atau peluang kerja sama. Saya selalu terbuka untuk mengeksplorasi teknologi baru dan mendengarkan kebutuhan sistem Anda.</p>
+            <p>Mari diskusikan ide, projek, atau peluang kerja sama. Saya selalu terbuka untuk mengeksplorasi teknologi baru dan memberikan solusi untuk kebutuhan sistem Anda.</p>
             <br>
-            <a href="https://wa.me/6285739246637" class="btn" target="_blank"><i class="fa-brands fa-whatsapp"></i> Chat via WhatsApp</a>
+           <a href="https://wa.me/6285739246637" class="btn" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 25px;">
+    <i class="fa-brands fa-whatsapp" style="color: #ffffff !important; font-weight: 400 !important; font-size: 1.6rem; margin-right: 10px; transform: translateY(5px) "></i>
+    <span style="font-weight: 600;">Chat via WhatsApp</span>
+</a>
         </div>
     </section>
 
