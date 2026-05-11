@@ -1,291 +1,676 @@
 <!DOCTYPE html>
-<html lang="id">
+<html class="dark scroll-smooth" lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alfan Azis | Software Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Ziss Dev | Alfan Azis Herdiansyah</title>
     
-    <style>
-        /* =========================================
-           1. PENGATURAN TEMA & VARIABEL
-           ========================================= */
-        :root, body.theme-dark {
-            --bg-color: #0f172a;
-            --bg-alt: #1e293b; 
-            --card-bg: #0f172a;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --nav-bg: rgba(15, 23, 42, 0.9);
-            --primary-color: #3b82f6;
-            --hero-bg: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    <!-- Favicon -->
+    <link rel="icon" href="Icon .png" type="image/png">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "secondary-fixed": "#e9ddff",
+              "secondary-container": "#571bc1",
+              "primary-fixed-dim": "#9ecaff",
+              "surface-container-low": "#1b1c1c",
+              "surface-container-high": "#292a2a",
+              "primary-fixed": "#d1e4ff",
+              "background": "#131314",
+              "on-surface": "#e4e2e2",
+              "surface-variant": "#343535",
+              "outline-variant": "#414750",
+              "primary": "#9ecaff",
+              "surface": "#131314",
+              "surface-container": "#1f2020",
+              "outline": "#8b919b",
+              "secondary": "#d0bcff",
+              "primary-container": "#5594d7",
+              "on-primary-container": "#002b4d",
+              "on-surface-variant": "#c1c7d2",
+              "on-primary": "#003258",
+              "on-secondary": "#3c0091"
+            },
+            "spacing": {
+              "grid-margin": "2rem",
+              "container-max-width": "1280px",
+              "section-gap": "8rem",
+              "card-padding": "2rem",
+              "grid-gutter": "1.5rem"
+            },
+            "fontFamily": {
+              "body-lg": ["Plus Jakarta Sans"],
+              "headline-lg": ["Plus Jakarta Sans"],
+              "headline-xl": ["Plus Jakarta Sans"],
+              "label-sm": ["JetBrains Mono"],
+              "headline-md": ["Plus Jakarta Sans"],
+              "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+              "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+              "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+              "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+              "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+              "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+              "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          }
         }
-
-        body.theme-light {
-            --bg-color: #f0f9ff;
-            --bg-alt: #e0f2fe; 
-            --card-bg: #ffffff;
-            --text-color: #0f172a;
-            --text-muted: #475569;
-            --nav-bg: rgba(240, 249, 255, 0.9);
-            --primary-color: #2563eb;
-            --hero-bg: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-        }
-
-        /* =========================================
-           2. RESET & ATURAN WAJIB
-           ========================================= */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-
-        body { background-color: var(--bg-color) !important; color: var(--text-color) !important; transition: all 0.4s ease; }
-        h1, h2, h3, h4, .nav-links a, #theme-toggle { color: var(--text-color) !important; }
-        p, li { color: var(--text-muted) !important; line-height: 1.8; }
-        
-        .logo { font-size: 2.5rem !important; font-weight: 700; color: var(--primary-color) !important; }
-        .hero h1 span, .section-title span { color: var(--primary-color) !important; }
-
-        /* =========================================
-           3. KOMPONEN UI
-           ========================================= */
-        nav { background-color: var(--nav-bg) !important; display: flex; justify-content: space-between; align-items: center; padding: 20px 10%; position: fixed; width: 100%; top: 0; z-index: 100; backdrop-filter: blur(10px); transition: all 0.4s ease; }
-        
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; margin-left: 20px; font-weight: 400; position: relative; padding-bottom: 5px; transition: color 0.3s; font-size: 0.9rem; }
-        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: var(--primary-color); transition: width 0.3s ease-in-out; }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a:hover { color: var(--primary-color) !important; }
-
-        #theme-toggle { background: none; border: none; font-size: 1.2rem; margin-left: 25px; cursor: pointer; transition: transform 0.3s; }
-        #theme-toggle:hover { color: var(--primary-color) !important; transform: rotate(20deg); }
-
-        .btn { padding: 12px 30px; background-color: var(--primary-color) !important; color: white !important; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block; border: none; transition: all 0.3s; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4); }
-
-        .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
-        .btn-outline { background-color: transparent !important; border: 2px solid var(--primary-color); color: var(--primary-color) !important; }
-        .btn-outline:hover { background-color: var(--primary-color) !important; color: #ffffff !important; }
-
-        /* =========================================
-           4. LAYOUT SECTION & GRID
-           ========================================= */
-        .hero { background: var(--hero-bg) !important; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 10% 0; transition: all 0.4s ease; }
-        .hero h1 { font-size: 4rem; margin-bottom: 10px; line-height: 1.2; }
-        .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; }
-
-        section { padding: 100px 10%; background-color: var(--bg-color) !important; transition: all 0.4s ease; }
-        section.bg-alt { background-color: var(--bg-alt) !important; }
-        
-        .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
-
-        .about-content { display: flex; gap: 40px; align-items: center; }
-        .about-text { flex: 1; }
-        
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background-color: var(--card-bg) !important; padding: 30px; border-radius: 12px; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid rgba(148, 163, 184, 0.1); }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .card i { font-size: 2.5rem; color: var(--primary-color) !important; margin-bottom: 20px; }
-        .card h3 { font-size: 1.4rem; margin-bottom: 10px; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 5px; line-height: 1.6; }
-
-        .contact-container { text-align: center; max-width: 600px; margin: 0 auto; }
-        .contact-container i { font-size: 3rem; color: var(--primary-color) !important; margin-bottom: 20px; }
-
-        footer { text-align: center; padding: 40px; background-color: var(--card-bg) !important; transition: all 0.4s ease; }
-        .social-links { margin-top: 20px; }
-        .social-links a { display: inline-block; margin: 0 10px; font-size: 1.5rem; color: var(--text-muted) !important; transition: all 0.3s; }
-        .social-links a:hover { color: var(--primary-color) !important; transform: translateY(-3px); }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.5rem; }
-            .about-content { flex-direction: column; }
-        }
-    </style>
+      }
+    </script>
+    
+    <!-- Custom JS -->
+    <script src="main.js" defer></script>
 </head>
 
-<body class="theme-dark">
-
-    <nav>
-        <div class="logo">Aziss.Dev</div>
-        <div class="nav-links">
-            <a href="#beranda">Beranda</a>
-            <a href="#tentang">Tentang Saya</a>
-            <a href="#skill">Skill</a>
-            <a href="#pengalaman">Pengalaman</a>
-            <a href="#pendidikan">Pendidikan</a>
-            <a href="#projek">Projek</a>
-            <a href="#kontak">Contact</a>
-            <button id="theme-toggle" title="Ganti Tema">
-                <i class="fa-solid fa-sun"></i>
-            </button>
-        </div>
-    </nav>
-
-    <section id="beranda" class="hero">
-        <p>Halo, selamat datang. Saya</p>
-        <h1>Alfan Azis <span>Herdiansyah</span></h1>
-        <p>Mahasiswa Teknik Informatika yang memiliki *passion* dalam pengembangan perangkat lunak, otomatisasi sistem, dan eksplorasi *hardware*.</p>
-        <div class="hero-buttons">
-            <a href="#projek" class="btn"><i class="fa-solid fa-rocket"></i> Lihat Portofolio</a>
-            <a href="cv-azis.pdf" target="_blank" class="btn btn-outline"><i class="fa-solid fa-file-pdf"></i> Unduh CV</a>
-        </div>
-    </section>
-
-    <section id="tentang" class="bg-alt">
-        <h2 class="section-title">Tentang <span>Saya</span></h2>
-        <div class="about-content">
-            <div class="about-text">
-                <p>Saya adalah mahasiswa aktif program studi <strong>Teknik Informatika (IPK 3.8)</strong> yang dinamis dengan pengalaman lintas bidang. Saya memadukan keahlian *hardware* (teknisi jaringan RT/RW Net), automasi *software* (pengelolaan bot bisnis akun trial aplikasi), dan *customer service* (pelayanan angkringan).</p>
-                <br>
-                <p>Saya terbiasa bekerja di lingkungan yang cepat dengan kemampuan komunikasi yang luwes. Berambisi untuk berkembang menjadi *Engineer* yang berorientasi pada solusi bisnis dan menghargai kerja keras, ketelitian teknis, serta dedikasi terhadap kepuasan pelanggan.</p>
+<body class="font-body-md text-body-md">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 left-0 w-full backdrop-blur-xl border-b border-white/10 shadow-2xl z-50 bg-white/5 dark:bg-primary/5">
+        <div class="flex justify-between items-center px-4 md:px-grid-margin py-4 max-w-container-max-width mx-auto">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full overflow-hidden border border-primary/30">
+                    <img alt="Alfan Azis Herdiansyah" class="w-full h-full object-cover" src="Ziss Dev.png"/>
+                </div>
+                <span class="text-headline-md font-headline-md font-extrabold text-on-surface tracking-tighter">Ziss Dev.</span>
             </div>
-        </div>
-    </section>
-
-    <section id="skill">
-        <h2 class="section-title">Fokus <span>Skill</span></h2>
-        <div class="grid-container">
-            <div class="card">
-                <i class="fa-brands fa-whatsapp"></i>
-                <h3>Bot Development</h3>
-                <p>Mampu membangun dan merancang logika skrip bot WhatsApp otomatis untuk manajemen katalog dan transaksi bisnis.</p>
-            </div>
-            <div class="card">
-                <i class="fa-solid fa-server"></i>
-                <h3>Server & Jaringan</h3>
-                <p>Instalasi *Fiber Optic*/LAN, konfigurasi Router/Modem, dan eksplorasi *headless server* mandiri.</p>
-            </div>
-            <div class="card">
-                <i class="fa-solid fa-code"></i>
-                <h3>Web Development</h3>
-                <p>Pemahaman fundamental HTML, CSS, JavaScript, dan integrasi API (Google Sheets) untuk aplikasi web interaktif.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="pengalaman" class="bg-alt">
-        <h2 class="section-title">Pengalaman <span>Kerja</span></h2>
-        <div class="grid-container">
-            <div class="card">
-                <i class="fa-solid fa-key"></i>
-                <h3>Reseller Aplikasi Premium</h3>
-                <p><strong>Freelance</strong> | Jan 2026 - Sekarang</p>
-                <p>Mengelola operasional bisnis dan distribusi produk digital (akun trial aplikasi premium). Menangani siklus layanan pelanggan mulai dari pemrosesan pesanan, penyelesaian masalah akses, hingga *after-sales service* untuk memastikan kepuasan pelanggan.</p>
-            </div>
-            <div class="card">
-                <i class="fa-solid fa-mug-hot"></i>
-                <h3>Waiters</h3>
-                <p><strong>Angkringan Serawung</strong> | Apr 2025 - Sekarang</p>
-                <p>Melayani dan mencatat pesanan pelanggan secara akurat dengan tempo cepat. Melakukan multitasking dengan efisien; menjaga kualitas kematangan menu sambil tetap responsif terhadap kedatangan pelanggan baru atau permintaan tambahan.</p>
-            </div>
-            <div class="card">
-                <i class="fa-solid fa-network-wired"></i>
-                <h3>Teknisi Jaringan</h3>
-                <p><strong>Mantri Jinom Babadan</strong> | Nov 2023 - Mei 2024</p>
-                <p>Melakukan instalasi, penarikan kabel (Fiber Optic/LAN), dan konfigurasi perangkat klien (Modem ONT, Router, dan Access Point) secara presisi. Menangani *troubleshooting* fisik dan *logical error* untuk meminimalisir *downtime* koneksi.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="pendidikan">
-        <h2 class="section-title">Riwayat <span>Pendidikan</span></h2>
-        <div class="grid-container">
-            <div class="card">
-                <i class="fa-solid fa-graduation-cap"></i>
-                <h3>Universitas Muhammadiyah Ponorogo</h3>
-                <p><strong>S1 Teknik Informatika</strong></p>
-                <p>2025 - Sekarang</p>
-            </div>
-            <div class="card">
-                <i class="fa-solid fa-school"></i>
-                <h3>SMKS AL-ISLAM Joresan</h3>
-                <p><strong>Teknik Komputer dan Jaringan</strong></p>
-                <p>2022 - 2025</p>
-            </div>
-            <div class="card">
-                <i class="fa-solid fa-building-columns"></i>
-                <h3>MTs AL-ISLAM Joresan</h3>
-                <p>Sekolah Menengah Pertama</p>
-                <p>2019 - 2022</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="projek" class="bg-alt">
-        <h2 class="section-title">Showcase <span>Projek</span></h2>
-        <div class="grid-container">
             
-            <div class="card">
-                <i class="fa-solid fa-cloud"></i>
-                <h3>SIAKAD CLOUD</h3>
-                <p>Aplikasi web Sistem Informasi Akademik berbasis *cloud* yang terintegrasi dengan Firebase. Dilengkapi dengan fitur autentikasi (*Login/Register*) dan Sistem Manajemen User (CRUD) khusus untuk Admin.</p>
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-6">
+                <a class="nav-link text-primary font-bold border-b-2 border-primary transition-colors duration-300" href="#home">Home</a>
+                <a class="nav-link text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#about">About</a>
+                <a class="nav-link text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#skills">Skills</a>
+                <a class="nav-link text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#experience">Experience</a>
+                <a class="nav-link text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#projects">Projects</a>
+                <a class="nav-link text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#services">Services</a>
+            </nav>
+            
+            <div class="hidden lg:flex items-center gap-4">
+                <a class="px-6 py-2.5 rounded-full font-bold bg-primary/10 text-primary hover:bg-primary hover:text-on-primary transition-colors text-sm" href="#contact">Contact Me</a>
             </div>
-
-            <div class="card">
-                <i class="fa-solid fa-heart"></i>
-                <h3>Web Undangan Digital</h3>
-                <p>Pengembangan undangan pernikahan digital interaktif (*Wedding Invitation*). Dilengkapi animasi transisi *smooth*, galeri foto, fitur hitung mundur (*countdown*), dan penarikan parameter nama tamu langsung dari URL.</p>
+            
+            <div class="flex items-center gap-4 lg:hidden">
+                <span id="mobile-menu-btn" class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">menu</span>
             </div>
-
-            <div class="card">
-                <i class="fa-solid fa-cash-register"></i>
-                <h3>Web Point of Sale (Kasir)</h3>
-                <p>Sistem kasir digital berbasis web untuk memudahkan pencatatan transaksi penjualan secara responsif. Memiliki fitur manajemen keranjang belanja dan kalkulasi total harga secara otomatis.</p>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-robot"></i>
-                <h3>Bot Manajemen Reseller</h3>
-                <p>Otomatisasi bisnis distribusi akun *trial* menggunakan bot WhatsApp. Memiliki fitur balas otomatis, pemanggilan katalog mandiri oleh pelanggan, serta verifikasi link pembayaran QRIS (*Google Sheets integration*).</p>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-wallet"></i>
-                <h3>Finance Tracker App</h3>
-                <p>Aplikasi web interaktif untuk mencatat arus kas (pemasukan dan pengeluaran) angkringan secara *real-time*. Terhubung secara dinamis dengan API Google Sheets sebagai *database* penyimpanannya.</p>
-            </div>
-
         </div>
-    </section>
+    </header>
 
-    <section id="kontak">
-        <h2 class="section-title">Hubungi <span>Saya</span></h2>
-        <div class="contact-container">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <p>Mari diskusikan ide, projek, atau peluang kerja sama. Saya selalu terbuka untuk mengeksplorasi teknologi baru dan memberikan solusi untuk kebutuhan sistem Anda.</p>
-            <br>
-           <a href="https://wa.me/6285739246637" class="btn" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; padding: 12px 25px;">
-    <i class="fa-brands fa-whatsapp" style="color: #ffffff !important; font-weight: 400 !important; font-size: 1.6rem; margin-right: 10px; transform: translateY(5px) "></i>
-    <span style="font-weight: 600;">Chat via WhatsApp</span>
-</a>
-        </div>
-    </section>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-background/95 backdrop-blur-xl z-[60] flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-300 md:hidden">
+        <span id="close-menu-btn" class="material-symbols-outlined absolute top-6 right-6 text-primary text-4xl cursor-pointer">close</span>
+        <a href="#home" class="mobile-link text-2xl font-bold text-primary">Home</a>
+        <a href="#about" class="mobile-link text-2xl font-medium text-on-surface-variant">About</a>
+        <a href="#skills" class="mobile-link text-2xl font-medium text-on-surface-variant">Skills</a>
+        <a href="#experience" class="mobile-link text-2xl font-medium text-on-surface-variant">Experience</a>
+        <a href="#projects" class="mobile-link text-2xl font-medium text-on-surface-variant">Projects</a>
+        <a href="#services" class="mobile-link text-2xl font-medium text-on-surface-variant">Services</a>
+        <a href="#contact" class="mobile-link text-2xl font-medium text-on-surface-variant">Contact</a>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 Alfan Azis Herdiansyah. Crafted with Code.</p>
-        <div class="social-links">
-            <a href="https://github.com/azissalfn03-png" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://tiktok.com/zisslfn" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://instagram.com/_alfnzs" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-[100vh] md:min-h-[819px] flex items-center px-4 md:px-grid-margin max-w-container-max-width mx-auto mb-section-gap pt-10 md:pt-0">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full">
+                <div class="order-2 md:order-1 text-center md:text-left">
+                    <h2 class="font-label-sm text-label-sm text-primary tracking-[0.2em] mb-4">ENGINEERING THE FUTURE</h2>
+                    <h1 class="font-headline-xl text-[40px] md:text-headline-xl mb-6 leading-tight">
+                        Halo, Saya <br/>
+                        <span class="text-gradient">Alfan Azis Herdiansyah</span>
+                    </h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-lg mx-auto md:mx-0 min-h-[60px]" id="typed-text">
+                        <span class="typed-cursor animate-pulse">|</span>
+                    </p>
+                    <div class="flex flex-col sm:flex-row flex-wrap justify-center md:justify-start gap-4">
+                        <a class="btn-primary px-8 py-4 rounded-full font-bold text-on-primary text-center" href="#projects">Lihat Proyek Saya</a>
+                        <a class="px-8 py-4 rounded-full font-bold border border-outline-variant/30 hover:bg-white/5 transition-colors text-center flex items-center justify-center gap-2" href="cv.pdf" target="_blank"><span class="material-symbols-outlined text-[20px]">download</span> Unduh CV</a>
+                        <a class="px-8 py-4 rounded-full font-bold border border-outline-variant/30 hover:bg-white/5 transition-colors text-center" href="#contact">Hubungi Saya</a>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center mt-10 md:mt-0">
+                    <div class="relative w-full max-w-[280px] md:max-w-md aspect-square">
+                        <div class="absolute inset-0 bg-primary/20 blur-[60px] md:blur-[100px] rounded-full"></div>
+                        <div class="glass-card w-full h-full flex items-center justify-center p-8 relative overflow-hidden group">
+                            <img alt="3D Visual" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" src="Imageku .jpeg"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me -->
+        <section class="px-4 md:px-grid-margin max-w-container-max-width mx-auto mb-section-gap" id="about">
+            <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 md:gap-grid-gutter">
+                <!-- Large Story Card -->
+                <div class="md:col-span-2 md:row-span-2 glass-card p-6 md:p-card-padding flex flex-col justify-between reveal">
+                    <div>
+                        <h3 class="font-headline-md text-headline-md mb-6">Dualitas Hidup & Teknologi</h3>
+                        <p class="text-on-surface-variant mb-4 text-justify">
+                            Sebagai mahasiswa Teknik Informatika, saya mendalami struktur data dan algoritma dengan presisi. Namun, saat malam tiba, saya bertransformasi menjadi pekerja Angkringan—sebuah tempat di mana interaksi manusia nyata terjadi.
+                        </p>
+                        <p class="text-on-surface-variant text-justify">
+                            Dualitas ini memberikan saya perspektif unik dalam membangun aplikasi: fungsional secara teknis namun tetap memiliki sentuhan humanis yang hangat.
+                        </p>
+                    </div>
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <span class="bg-surface-container-high px-4 py-2 rounded-lg font-label-sm text-label-sm border border-outline-variant/20">Informatics Student</span>
+                        <span class="bg-surface-container-high px-4 py-2 rounded-lg font-label-sm text-label-sm border border-outline-variant/20">Barista & Worker</span>
+                    </div>
+                </div>
+                <!-- Exploration Card -->
+                <div class="md:col-span-2 glass-card p-6 md:p-card-padding flex flex-col md:flex-row items-start md:items-center gap-6 reveal delay-100">
+                    <span class="material-symbols-outlined text-[48px] text-primary" style="font-variation-settings: 'FILL' 1;">explore</span>
+                    <div>
+                        <h4 class="font-headline-md text-[20px] md:text-headline-md mb-2 md:mb-0">Eksplorasi Tanpa Batas</h4>
+                        <p class="text-on-surface-variant text-sm mt-2">Ketertarikan tinggi pada integrasi AI dan sistem otomasi digital.</p>
+                    </div>
+                </div>
+                <!-- Tech Stack Card -->
+                <div class="glass-card p-6 md:p-card-padding flex flex-col justify-center reveal delay-200">
+                    <span class="text-primary font-label-sm text-label-sm mb-2">TOOLS UTAMA</span>
+                    <p class="font-bold">Next.js, Python, Tailwind, Flutter</p>
+                </div>
+                <!-- Stats Card -->
+                <div class="glass-card p-6 md:p-card-padding flex flex-col justify-center text-center reveal delay-300">
+                    <span class="text-headline-xl font-headline-xl text-primary">15+</span>
+                    <span class="font-label-sm text-label-sm mt-2">PROYEK SELESAI</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="px-4 md:px-grid-margin max-w-container-max-width mx-auto mb-section-gap" id="skills">
+            <div class="text-center mb-12">
+                <h2 class="font-headline-xl text-[36px] md:text-headline-xl mb-4">Keahlian & Teknologi</h2>
+                <p class="text-on-surface-variant max-w-xl mx-auto">Alat dan bahasa pemrograman yang saya kuasai untuk membangun solusi digital secara optimal.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Frontend -->
+                <div class="glass-card p-6 md:p-card-padding reveal">
+                    <h3 class="font-headline-md text-[24px] mb-6 flex items-center gap-3"><span class="material-symbols-outlined text-primary">web</span> Frontend Development</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm">HTML/CSS & Tailwind</span>
+                                <span class="text-primary text-sm font-label-sm">90%</span>
+                            </div>
+                            <div class="w-full bg-surface-container-high rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full skill-bar transition-all duration-1000 w-0" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm">JavaScript & Next.js</span>
+                                <span class="text-primary text-sm font-label-sm">80%</span>
+                            </div>
+                            <div class="w-full bg-surface-container-high rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full skill-bar transition-all duration-1000 w-0 delay-100" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm">Flutter (Mobile)</span>
+                                <span class="text-primary text-sm font-label-sm">70%</span>
+                            </div>
+                            <div class="w-full bg-surface-container-high rounded-full h-2">
+                                <div class="bg-primary h-2 rounded-full skill-bar transition-all duration-1000 w-0 delay-200" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend & Tools -->
+                <div class="glass-card p-6 md:p-card-padding reveal delay-100">
+                    <h3 class="font-headline-md text-[24px] mb-6 flex items-center gap-3"><span class="material-symbols-outlined text-secondary">database</span> Backend & Tools</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm">Python & Node.js</span>
+                                <span class="text-secondary text-sm font-label-sm">75%</span>
+                            </div>
+                            <div class="w-full bg-surface-container-high rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full skill-bar transition-all duration-1000 w-0" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm">MySQL & Firebase</span>
+                                <span class="text-secondary text-sm font-label-sm">85%</span>
+                            </div>
+                            <div class="w-full bg-surface-container-high rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full skill-bar transition-all duration-1000 w-0 delay-100" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm">Git & Server Mgt</span>
+                                <span class="text-secondary text-sm font-label-sm">80%</span>
+                            </div>
+                            <div class="w-full bg-surface-container-high rounded-full h-2">
+                                <div class="bg-secondary h-2 rounded-full skill-bar transition-all duration-1000 w-0 delay-200" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Experience Section -->
+        <section class="px-4 md:px-grid-margin max-w-container-max-width mx-auto mb-section-gap" id="experience">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6 text-center md:text-left">
+                <div class="w-full">
+                    <h2 class="font-headline-xl text-[36px] md:text-headline-xl mb-4 text-center">Pengalaman Kerja</h2>
+                    <p class="text-on-surface-variant max-w-md mx-auto text-center">Perjalanan karir dan pengalaman profesional saya di berbagai bidang.</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-grid-gutter">
+                <!-- Card 1: Reseller Aplikasi Premium -->
+                <div class="glass-card p-6 md:p-card-padding flex flex-col h-full reveal hover:-translate-y-2 transition-transform duration-300 border-t-4 border-primary">
+                    <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-[32px] text-primary">key</span>
+                    </div>
+                    <h3 class="font-headline-md text-[24px] mb-2 font-bold text-on-surface">Reseller Aplikasi Premium</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-surface-container-high px-3 py-1 rounded-md text-xs font-label-sm text-primary border border-primary/20">Freelance</span>
+                        <span class="bg-surface-container-high px-3 py-1 rounded-md text-xs font-label-sm text-on-surface-variant border border-outline-variant/20">Jan 2026 - Sekarang</span>
+                    </div>
+                    <p class="text-on-surface-variant text-sm leading-relaxed flex-grow text-justify">
+                        Mengelola operasional bisnis dan distribusi produk digital (akun trial aplikasi premium). Menangani siklus layanan pelanggan mulai dari pemrosesan pesanan, penyelesaian masalah akses, hingga <i>after-sales service</i> untuk memastikan kepuasan pelanggan.
+                    </p>
+                </div>
+
+                <!-- Card 2: Waiters -->
+                <div class="glass-card p-6 md:p-card-padding flex flex-col h-full reveal delay-100 hover:-translate-y-2 transition-transform duration-300 border-t-4 border-secondary">
+                    <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-[32px] text-secondary">local_cafe</span>
+                    </div>
+                    <h3 class="font-headline-md text-[24px] mb-2 font-bold text-on-surface">Waiters</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-surface-container-high px-3 py-1 rounded-md text-xs font-label-sm text-secondary border border-secondary/20">Angkringan Serawung</span>
+                        <span class="bg-surface-container-high px-3 py-1 rounded-md text-xs font-label-sm text-on-surface-variant border border-outline-variant/20">Apr 2025 - Sekarang</span>
+                    </div>
+                    <p class="text-on-surface-variant text-sm leading-relaxed flex-grow text-justify">
+                        Melayani dan mencatat pesanan pelanggan secara akurat dengan tempo cepat. Melakukan multitasking dengan efisien; menjaga kualitas kematangan menu sambil tetap responsif terhadap kedatangan pelanggan baru atau permintaan tambahan.
+                    </p>
+                </div>
+
+                <!-- Card 3: Teknisi Jaringan -->
+                <div class="glass-card p-6 md:p-card-padding flex flex-col h-full reveal delay-200 hover:-translate-y-2 transition-transform duration-300 border-t-4 border-[#5594d7]">
+                    <div class="w-14 h-14 rounded-2xl bg-[#5594d7]/10 flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-[32px] text-[#5594d7]">lan</span>
+                    </div>
+                    <h3 class="font-headline-md text-[24px] mb-2 font-bold text-on-surface">Teknisi Jaringan</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-surface-container-high px-3 py-1 rounded-md text-xs font-label-sm text-[#5594d7] border border-[#5594d7]/20">Mantri Jinom Babadan</span>
+                        <span class="bg-surface-container-high px-3 py-1 rounded-md text-xs font-label-sm text-on-surface-variant border border-outline-variant/20">Nov 2023 - Mei 2024</span>
+                    </div>
+                    <p class="text-on-surface-variant text-sm leading-relaxed flex-grow text-justify">
+                        Melakukan instalasi, penarikan kabel (Fiber Optic/LAN), dan konfigurasi perangkat klien (Modem ONT, Router, dan Access Point) secara presisi. Menangani <i>troubleshooting</i> fisik dan <i>logical error</i> untuk meminimalisir <i>downtime</i> koneksi.
+                    </p>
+                </div>
+                
+                <!-- Card 4: Web Developer -->
+                <div class="glass-card p-6 md:p-card-padding flex flex-col h-full reveal delay-300 hover:-translate-y-2 transition-transform duration-300 border-t-4 border-[#d0bcff]">
+                    <div class="w-14 h-14 rounded-2xl bg-[#d0bcff]/10 flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-[32px] text-[#d0bcff]">code</span>
+                    </div>
+                    <h3 class="font-headline-md text-[24px] mb-2 font-bold text-on-surface">Freelance Web Developer</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-surface-container-high px-3 py-1 rounded-md text-xs font-label-sm text-[#d0bcff] border border-[#d0bcff]/20">Freelance</span>
+                        <span class="bg-surface-container-high px-3 py-1 rounded-md text-xs font-label-sm text-on-surface-variant border border-outline-variant/20">2024 - Sekarang</span>
+                    </div>
+                    <p class="text-on-surface-variant text-sm leading-relaxed flex-grow text-justify">
+                        Mengembangkan berbagai proyek berbasis web seperti sistem informasi akademik (SIAKAD) dan aplikasi Point of Sales (POS) untuk klien lokal menggunakan teknologi web modern.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="px-4 md:px-grid-margin max-w-container-max-width mx-auto mb-section-gap" id="education">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6 text-center md:text-left">
+                <div class="w-full">
+                    <h2 class="font-headline-xl text-[36px] md:text-headline-xl mb-4 text-center">Riwayat Pendidikan</h2>
+                    <p class="text-on-surface-variant max-w-md mx-auto text-center">Latar belakang akademis dan pendidikan formal yang mendukung karir saya.</p>
+                </div>
+            </div>
+            
+            <div class="relative border-l-2 border-outline-variant/30 ml-4 md:ml-12 space-y-8 py-2">
+                <!-- Edu 1 -->
+                <div class="relative pl-8 md:pl-10 reveal">
+                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-primary ring-4 ring-background"></div>
+                    <div class="glass-card p-6 md:p-8 rounded-2xl hover:-translate-y-1 transition-transform border-l-4 border-primary shadow-lg">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3 gap-3">
+                            <h3 class="font-headline-md text-[22px] font-bold text-on-surface">Universitas Muhammadiyah Ponorogo</h3>
+                            <span class="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-label-sm w-fit border border-primary/20">2023 - Sekarang</span>
+                        </div>
+                        <h4 class="text-on-surface-variant font-medium mb-4 text-[16px] flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">school</span> S1 Teknik Informatika</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed text-justify">
+                            Fokus mendalam pada rekayasa perangkat lunak, struktur data, kecerdasan buatan, dan arsitektur sistem. Aktif berpartisipasi dalam berbagai proyek kolaboratif pengembangan aplikasi dan mengeksplorasi tren teknologi terbaru.
+                        </p>
+                    </div>
+                </div>
+                <!-- Edu 2 -->
+                <div class="relative pl-8 md:pl-10 reveal delay-100">
+                    <div class="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-surface-variant ring-4 ring-background"></div>
+                    <div class="glass-card p-6 md:p-8 rounded-2xl hover:-translate-y-1 transition-transform border-l-4 border-outline-variant shadow-lg">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3 gap-3">
+                            <h3 class="font-headline-md text-[22px] font-bold text-on-surface">SMK N 1 Slahung</h3>
+                            <span class="bg-surface-variant text-on-surface-variant px-4 py-1.5 rounded-full text-xs font-label-sm w-fit border border-outline-variant/20">2020 - 2023</span>
+                        </div>
+                        <h4 class="text-on-surface-variant font-medium mb-4 text-[16px] flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">computer</span> Teknik Komputer dan Jaringan</h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed text-justify">
+                            Mempelajari fondasi infrastruktur jaringan modern, administrasi server sistem operasi Linux/Windows, instalasi perangkat keras komputasi, serta troubleshooting sistem secara komprehensif.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Showcase -->
+        <section class="px-4 md:px-grid-margin max-w-container-max-width mx-auto mb-section-gap" id="projects">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
+                <div class="max-w-xl">
+                    <h2 class="font-headline-xl text-[36px] md:text-headline-xl mb-4">Project Showcase</h2>
+                    <p class="text-on-surface-variant">Koleksi solusi digital yang telah saya bangun, mulai dari sistem akademik hingga otomasi bot.</p>
+                </div>
+                
+                <!-- Project Filters -->
+                <div class="flex flex-wrap gap-2">
+                    <button class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium bg-primary text-on-primary transition-all shadow-lg" data-filter="all">Semua</button>
+                    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-surface-container-high text-on-surface-variant hover:bg-surface-variant transition-all border border-outline-variant/30" data-filter="web">Web App</button>
+                    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-surface-container-high text-on-surface-variant hover:bg-surface-variant transition-all border border-outline-variant/30" data-filter="mobile">Mobile</button>
+                    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-surface-container-high text-on-surface-variant hover:bg-surface-variant transition-all border border-outline-variant/30" data-filter="bot">Bot & Lainnya</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-grid-gutter transition-all duration-500" id="project-container">
+                <!-- Projects Array -->
+                <div class="project-item project-web glass-card group overflow-hidden h-[350px] md:h-[400px] relative reveal">
+                    <div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA-ZDlfZruGvhs5E5EyP4ywlTZVnFRqtdphPNJWyRNHbIdOksAN-llwAjmW_RHHmC-hnJ-UGmjgy0pIUMRoRX6tEioDcMNGxD8uZztr-7ZtyOrvfQkMR8Efei6dlfUCBqHp9XlyxuO7RXL_B4uqyYK5WhICkk1IGyBVBj0NhzuIAUVGLzQ-tOBEydAIJJwqs-AJ8dwH7k5J3-28hpDpAFOt8MJJA0-KkydrlBncV9IPLnDd0BpnTyMuLQLD-ZgDWJwyWWlrEeNUHCc')"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                        <div class="transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h4 class="font-headline-md text-headline-md text-white mb-2">Web SIAKAD</h4>
+                            <p class="text-on-surface-variant text-sm mb-4">Sistem Informasi Akademik terintegrasi untuk manajemen data mahasiswa dan nilai.</p>
+                            <div class="flex gap-4">
+                                <a class="text-primary font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">link</span> Live Demo</a>
+                                <a class="text-on-surface font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">code</span> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item project-web glass-card group overflow-hidden h-[350px] md:h-[400px] relative reveal delay-100">
+                    <div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCdmGhgPxnAarkgTts7cnIzGHMJWJE6DwdRtpUdN-k9GOcn7Dd1X3CYgQXd_VE2qb859yTCc7U9Oiw5x9E7th7fPz6eZcCOjmExdoZnUqN6GiOSkt1nVtbZHdW99vxtJtbyLeUkbSn7pW8dasbNHPwPLIRgLfT-hbLrCANnvr7pJdloBVarAvz5tQ7Qs6EhyrGJz7xv6jvJ93mCVcfT6pjwOpYCKzfyMGShkqavmv8f1IEbXeAWnZXkCXrv8ufMK3qqySFHLDbbTFc')"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                        <div class="transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h4 class="font-headline-md text-headline-md text-white mb-2">Web Kasir</h4>
+                            <p class="text-on-surface-variant text-sm mb-4">Aplikasi Point of Sales (POS) responsif untuk efisiensi transaksi bisnis retail.</p>
+                            <div class="flex gap-4">
+                                <a class="text-primary font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">link</span> Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item project-bot glass-card group overflow-hidden h-[350px] md:h-[400px] relative reveal delay-200">
+                    <div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB-sTXlKdD59KMmAsv00CLQsY0KxHI3ZMH_-b8ajZt0TEnozVxA177qvBRQoqXWtwX9tqVmmKR0Sko_RdY0P9lZjxWDFHu4IiG0QrkPAB_PTHB1qcm5PIf574DBCf3SkWzijqZ_uYMaGAW78ofylcYl31WFUqZV0o1P_Psn9YTB7j386UkqKwlpOB2q8u7fneUJ3UMg4boBslF4mixR-Lmbwr-dhPSeDoXU7hisiJ-c2yxHuoCXP9OFxkbarzLPKa5hDe6bGQ7bG_k')"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-90 md:opacity-0 md:group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                        <div class="transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h4 class="font-headline-md text-headline-md text-white mb-2">WhatsApp Bot</h4>
+                            <p class="text-on-surface-variant text-sm mb-4">Automasi pesan cerdas untuk layanan pelanggan, manajemen grup, dan jual beli.</p>
+                            <div class="flex gap-4">
+                                <a class="text-primary font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">link</span> Info Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4: Daily Worker App -->
+                <div class="project-item project-mobile glass-card group overflow-hidden h-[350px] md:h-[400px] relative reveal">
+                <div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A sleek mobile application interface for managing daily workers. The screen displays employee profiles, task status trackers, and time logs. The design is minimalist and high-contrast, utilizing the primary blue color for key actions. The background is a soft-focus office environment, emphasizing professional utility and modern workforce management." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDdhhRJ1wrXuyXFI2JCS36Ea2d5rtJpVgi6tCkRLIeSvXrd63fqLSAhcTMoe_uCbpMY3d1S2jcsb3EqH76oZmzP-mahOCFyATTkLH6VzMKlNcri5e6l76GxhD9ZcJ9xzJiZIS9gW3jHE07_J_CdKjtxXZ__Bjk9pZIdTOY2ghTUS484Rzyxfccr3iBtA7f2T6jtf_hV0XqhY5stdznGa4feHu4xAwDZN77DU1Ce38f15ht6LF7dhxes3VOt9epM4fJ6DSrEBxgiEVY')"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+                <div class="transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <h4 class="font-headline-md text-headline-md text-white mb-2">Daily Worker App</h4>
+                <p class="text-on-surface-variant text-sm mb-4 md:opacity-0 md:group-hover:opacity-100 transition-opacity">Manajemen tenaga kerja harian dengan fitur presensi dan pelaporan tugas.</p>
+                <div class="flex gap-4">
+                <a class="text-primary font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">link</span> Live Demo</a>
+                <a class="text-on-surface font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">code</span> GitHub</a>
+                </div>
+                </div>
+                </div>
+                </div>
+                
+                <!-- Project 5: Web Undangan -->
+                <div class="project-item project-web glass-card group overflow-hidden h-[350px] md:h-[400px] relative reveal delay-100">
+                <div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="An elegant digital wedding invitation website. The interface features sophisticated serif typography, soft gold accents, and a smooth scrolling parallax effect. The overall style is luxurious and minimal, creating a high-end personal event experience on a dark, moody background with subtle floral illustrations." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDbpNTuhOSX7nSKxsMzyOIdLC5iUPGR-BRbI51uI07sRMze67x13YQuu9mwQSYcseN-PPYmYcZAYYWMCmvWkBshSEWY2qO9SsaphaS4bqqc49pw6CO2uENLuv4y8YZjAFk-m_CQGKjE51DmgFHX0l6Cjmq_XRjavXXUYd4nFAIgsZ2-OO4ev_Y9T_EfCOqUBhMgg-xKlRtDo3Z8bvLlRKLpRm16JCSrGEyZoFQ66Fe90WuXwAl_arfas8Pfr1LY5-h7ON7CRFCkBXQ')"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+                <div class="transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <h4 class="font-headline-md text-headline-md text-white mb-2">Web Undangan</h4>
+                <p class="text-on-surface-variant text-sm mb-4 md:opacity-0 md:group-hover:opacity-100 transition-opacity">Platform undangan digital elegan dengan manajemen RSVP tamu otomatis.</p>
+                <div class="flex gap-4">
+                <a class="text-primary font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">link</span> Live Demo</a>
+                <a class="text-on-surface font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">code</span> GitHub</a>
+                </div>
+                </div>
+                </div>
+                </div>
+                
+                <!-- Project 6: Mampor Moto -->
+                <div class="project-item project-web glass-card group overflow-hidden h-[350px] md:h-[400px] relative reveal delay-200">
+                <div class="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A dynamic photography portfolio website called 'Mampor Moto'. The design showcases large, high-resolution action photography of motorcycles. The UI is cinematic, featuring bold typography and heavy contrast, reflecting a high-energy and adventurous brand identity. The lighting is dramatic, emphasizing the movement and detail in the images." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgkararj-Ra_hUqNHtpyyiZYuTxPHNL8z2I7k39tgvKLeGrUwgOwoiEpYffszT39zoIKQb_OhpiRpqeoIGne_JD8_luHHZtvsN3v0BfOoXYdKLx_5WCAcqk63BBXiyfS51aLLTV6zA01XgZVc8xn-gz8_bAcOPuD-pjMhCG_D-cQKSK-bxp965ksD5SvgSdKvVMh4AJ2avfV8ZtWWaPNgIlpSeXToOdwEfDCq6P76iXg6qiYhG2LSOQ_6-xf9IJkwMt4Ll36PrhiE')"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+                <div class="transform translate-y-0 md:translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <h4 class="font-headline-md text-headline-md text-white mb-2">Mampor Moto</h4>
+                <p class="text-on-surface-variant text-sm mb-4 md:opacity-0 md:group-hover:opacity-100 transition-opacity">Portfolio photography yang berfokus pada estetika otomotif dan petualangan.</p>
+                <div class="flex gap-4">
+                <a class="text-primary font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">link</span> Live Demo</a>
+                <a class="text-on-surface font-bold flex items-center gap-1 text-sm" href="#"><span class="material-symbols-outlined text-sm">code</span> GitHub</a>
+                </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business & Services -->
+        <section class="px-4 md:px-grid-margin max-w-container-max-width mx-auto mb-section-gap" id="services">
+            <h2 class="font-headline-xl text-[36px] md:text-headline-xl mb-12 text-center">Business & Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-grid-gutter max-w-4xl mx-auto">
+                <!-- Basic Trial -->
+                <div class="glass-card p-6 md:p-card-padding border-t-4 border-primary reveal">
+                    <span class="font-label-sm text-label-sm text-primary mb-4 block">PREMIUM APP TRIAL</span>
+                    <h3 class="font-headline-lg text-[32px] md:text-headline-lg mb-4">Rp 50rb<span class="text-body-md font-normal text-on-surface-variant">/trial</span></h3>
+                    <p class="text-sm text-on-surface-variant mb-6">Mencoba akses aplikasi-aplikasi premium secara legal melalui masa trial eksklusif.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Akses Trial Premium Valid</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Beragam Pilihan Aplikasi</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Panduan Aktivasi</li>
+                        <li class="flex items-center gap-3 text-on-surface-variant"><span class="material-symbols-outlined text-sm">cancel</span> Support 24/7</li>
+                    </ul>
+                    <button class="w-full py-4 rounded-xl border border-primary text-primary font-bold hover:bg-primary/10 transition-colors">Pesan Trial</button>
+                </div>
+                <!-- Full License -->
+                <div class="glass-card p-6 md:p-card-padding border-t-4 border-secondary reveal delay-100">
+                    <span class="font-label-sm text-label-sm text-secondary mb-4 block">WEB DEV / SISTEM</span>
+                    <h3 class="font-headline-lg text-[32px] md:text-headline-lg mb-4">Custom<span class="text-body-md font-normal text-on-surface-variant">/project</span></h3>
+                    <p class="text-sm text-on-surface-variant mb-6">Pembuatan website undangan, landing page, hingga sistem kasir / manajemen data.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Desain Responsif (Android/PC)</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Integrasi Database Firebase</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Hosting / Domain .my.id</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-sm">check_circle</span> Support Maintenance</li>
+                    </ul>
+                    <button class="w-full py-4 rounded-xl bg-secondary text-on-secondary font-bold hover:opacity-90 transition-opacity">Konsultasi Proyek</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="px-4 md:px-grid-margin max-w-container-max-width mx-auto mb-section-gap" id="testimonials">
+            <h2 class="font-headline-xl text-[36px] md:text-headline-xl mb-4 text-center">Apa Kata Mereka</h2>
+            <p class="text-on-surface-variant max-w-md mx-auto text-center mb-12">Ulasan jujur dari klien dan rekan kolaborator tentang kualitas pekerjaan saya.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Testi 1 -->
+                <div class="glass-card p-8 flex flex-col justify-between reveal relative group">
+                    <div class="absolute -top-4 -right-4 w-12 h-12 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/40 transition-colors"></div>
+                    <div class="mb-6 relative z-10">
+                        <span class="material-symbols-outlined text-primary text-[40px] mb-4 opacity-50 block">format_quote</span>
+                        <p class="text-sm text-on-surface-variant italic leading-relaxed text-justify">"Aplikasi kasir yang dibuat sangat membantu operasional toko kami. Respon sangat cepat saat ada kendala dan antarmukanya mudah dipahami oleh kasir baru sekalipun."</p>
+                    </div>
+                    <div class="flex items-center gap-4 border-t border-outline-variant/20 pt-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-lg shadow-lg">BS</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-on-surface">Budi Santoso</h4>
+                            <span class="text-xs text-on-surface-variant">Pemilik Minimarket Lokal</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testi 2 -->
+                <div class="glass-card p-8 flex flex-col justify-between reveal delay-100 relative group">
+                    <div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary/20 rounded-full blur-xl group-hover:bg-secondary/40 transition-colors"></div>
+                    <div class="mb-6 relative z-10">
+                        <span class="material-symbols-outlined text-secondary text-[40px] mb-4 opacity-50 block">format_quote</span>
+                        <p class="text-sm text-on-surface-variant italic leading-relaxed text-justify">"Desain web undangannya sangat elegan dan mewah, pas dengan ekspektasi kami. Fitur RSVP juga bekerja sangat lancar. Banyak tamu yang memuji undangannya!"</p>
+                    </div>
+                    <div class="flex items-center gap-4 border-t border-outline-variant/20 pt-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-secondary to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">DR</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-on-surface">Dina & Reza</h4>
+                            <span class="text-xs text-on-surface-variant">Klien Web Undangan</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testi 3 -->
+                <div class="glass-card p-8 flex flex-col justify-between reveal delay-200 relative group">
+                    <div class="absolute -top-4 -right-4 w-12 h-12 bg-[#5594d7]/20 rounded-full blur-xl group-hover:bg-[#5594d7]/40 transition-colors"></div>
+                    <div class="mb-6 relative z-10">
+                        <span class="material-symbols-outlined text-[#5594d7] text-[40px] mb-4 opacity-50 block">format_quote</span>
+                        <p class="text-sm text-on-surface-variant italic leading-relaxed text-justify">"Bot WhatsApp yang di-setup Ziss Dev sangat responsif dan membantu automasi layanan pelanggan di grup komunitas kami. Kinerjanya stabil 24/7."</p>
+                    </div>
+                    <div class="flex items-center gap-4 border-t border-outline-variant/20 pt-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#5594d7] to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg">AR</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-on-surface">Arif Rahman</h4>
+                            <span class="text-xs text-on-surface-variant">Admin Komunitas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="px-4 md:px-grid-margin max-w-container-max-width mx-auto mb-16 md:mb-section-gap" id="contact">
+            <div class="glass-card grid grid-cols-1 lg:grid-cols-2 overflow-hidden reveal">
+                <div class="p-6 md:p-card-padding bg-primary/5 flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-headline-lg text-[32px] md:text-headline-lg mb-6">Ayo Berkolaborasi</h2>
+                        <p class="text-on-surface-variant mb-8">Punya ide proyek, butuh website, atau ingin membeli akses trial aplikasi premium? Jangan ragu untuk menghubungi saya!</p>
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+                                    <span class="material-symbols-outlined">mail</span>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant">EMAIL ME</p>
+                                    <p class="font-bold truncate">hello@zisdev.my.id</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+                                    <span class="material-symbols-outlined">share</span>
+                                </div>
+                                <div>
+                                    <p class="font-label-sm text-label-sm text-on-surface-variant">SOCIALS</p>
+                                    <div class="flex gap-4 mt-1">
+                                        <a class="text-on-surface hover:text-primary transition-colors text-sm" href="#">LinkedIn</a>
+                                        <a class="text-on-surface hover:text-primary transition-colors text-sm" href="#">GitHub</a>
+                                        <a class="text-on-surface hover:text-primary transition-colors text-sm" href="#">Instagram</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 md:p-card-padding">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block font-label-sm text-label-sm mb-2 text-on-surface-variant">NAMA LENGKAP</label>
+                                <input class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Nama Anda" type="text"/>
+                            </div>
+                            <div>
+                                <label class="block font-label-sm text-label-sm mb-2 text-on-surface-variant">EMAIL</label>
+                                <input class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="email@contoh.com" type="email"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-label-sm text-label-sm mb-2 text-on-surface-variant">SUBJEK</label>
+                            <input class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Pertanyaan Layanan / Web / Bot" type="text"/>
+                        </div>
+                        <div>
+                            <label class="block font-label-sm text-label-sm mb-2 text-on-surface-variant">PESAN</label>
+                            <textarea class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Ceritakan ide atau kebutuhan Anda..." rows="5"></textarea>
+                        </div>
+                        <button class="btn-primary w-full py-4 rounded-xl font-bold text-on-primary" type="button">Kirim Pesan Sekarang</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-12 border-t border-outline-variant/20 bg-surface-container-lowest pb-24 md:pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-grid-margin max-w-container-max-width mx-auto items-center">
+            <div class="text-center md:text-left">
+                <h3 class="text-headline-md font-headline-md font-bold text-on-surface mb-2">zisdev.my.id</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">© 2026 Crafted by Ziss Dev.</p>
+            </div>
+            <div class="flex flex-wrap justify-center md:justify-end gap-6">
+                <a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors duration-200" href="#about">About</a>
+                <a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors duration-200" href="#experience">Experience</a>
+                <a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors duration-200" href="#projects">Projects</a>
+                <a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors duration-200" href="#services">Services</a>
+                <a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors duration-200" href="#contact">Contact</a>
+            </div>
         </div>
     </footer>
 
-    <script>
-        const btnTheme = document.getElementById('theme-toggle');
-        const iconTheme = btnTheme.querySelector('i');
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-24 md:bottom-8 right-6 z-50 flex flex-col gap-4">
+        <!-- Back to Top -->
+        <button id="backToTop" class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/30 text-on-surface flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all duration-300 opacity-0 translate-y-4 pointer-events-none shadow-lg">
+            <span class="material-symbols-outlined">arrow_upward</span>
+        </button>
+        <!-- WhatsApp -->
+        <a href="https://wa.me/6281234567890" target="_blank" class="w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center hover:scale-110 hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] transition-all duration-300 shadow-lg relative group">
+            <span class="material-symbols-outlined">chat</span>
+            <!-- Tooltip -->
+            <span class="absolute right-full mr-4 bg-surface-container-high text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-outline-variant/30 shadow-lg text-on-surface">Hubungi Saya</span>
+        </a>
+    </div>
 
-        btnTheme.addEventListener('click', () => {
-            document.body.classList.toggle('theme-light');
-            document.body.classList.toggle('theme-dark');
-
-            if(document.body.classList.contains('theme-light')) {
-                iconTheme.className = 'fa-solid fa-moon'; 
-            } else {
-                iconTheme.className = 'fa-solid fa-sun'; 
-            }
-        });
-    </script>
+    <!-- BottomNavBar (Mobile Only - Android/iPhone) -->
+    <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md rounded-full backdrop-blur-2xl bg-surface/80 border border-white/10 shadow-[0_0_20px_rgba(158,202,255,0.2)] z-50 flex justify-around items-center px-6 py-3">
+        <a class="bottom-nav-link active bg-primary-container text-on-primary-container rounded-full p-3 hover:scale-110 transition-all duration-300" href="#home"><span class="material-symbols-outlined">home</span></a>
+        <a class="bottom-nav-link text-on-surface-variant p-3 hover:scale-110 transition-all duration-300" href="#about"><span class="material-symbols-outlined">person</span></a>
+        <a class="bottom-nav-link text-on-surface-variant p-3 hover:scale-110 transition-all duration-300" href="#projects"><span class="material-symbols-outlined">work</span></a>
+        <a class="bottom-nav-link text-on-surface-variant p-3 hover:scale-110 transition-all duration-300" href="#contact"><span class="material-symbols-outlined">mail</span></a>
+    </nav>
 </body>
 </html>
